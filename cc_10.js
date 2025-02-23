@@ -15,6 +15,10 @@ updateStock(quantity){
     this.stock -= quantity; // Decreasing of stock bases on quantity ordered
         
     }
+    // Task 5 Modifications
+    restock(quantity){
+        this.stock += quantity; // Increase Stock by restock Quantity
+    }
 }
 
 
@@ -74,6 +78,13 @@ class Inventory {
                 console.log(order.getOrderDetails());
             });
 }
+            // Task 5 Modifications
+            restockProduct(productId, quantity){
+                const product = this.products.find(p =>p.id === productId); // Find a product bases on product ID
+                if (product) {
+                    product.restock(quantity); // Increase product stock based on quantity
+                }
+            }
 }
 
 const inventory = new Inventory(); // Created a new Inventory Instance
@@ -89,3 +100,8 @@ inventory.listOrders(); // Expected output: "Order ID: 601, Product: Laptop, Qua
 
 console.log(prod1.getDetails()); // Expected output: "Product: Laptop, ID: 101, Price: $1200, Stock: 3"
 
+// Task 5 Implementing Product Restocking
+
+inventory.restockProduct(101, 5); // Restocking of Product
+
+console.log(prod1.getDetails()); // Expected output: "Product: Laptop, ID: 101, Price: $1200, Stock: 8"
